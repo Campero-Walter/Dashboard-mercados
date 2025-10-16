@@ -10,6 +10,7 @@ Created on Thu Oct 16 14:29:36 2025
 #========================================================================================================================
 #                                           DASHBOARD MERCADOS FINANCIEROS
 #========================================================================================================================
+
 import streamlit as st
 import yfinance as yf
 import seaborn as sns
@@ -49,11 +50,12 @@ if seccion == "MERVAL (USD CCL)":
     with st.spinner("Descargando datos..."):
         ticker = "^MERV"
         df = yf.download(ticker, auto_adjust=False, progress=False)['Close']
+        df.rename(columns={"^MERV": "Close"}, inplace=True)
         df["Close"][pd.to_datetime("2022-07-14")] = df["Close"][pd.to_datetime("2022-07-13")]
 
         ypfd = yf.download('YPFD.BA', auto_adjust=True)['Close']
         ypf = yf.download('YPF', auto_adjust=True)['Close']
-        ccl = (ypfd / ypf).dropna()
+        ccl = (ypfd['YPFD.BA'] / ypf['YPF']).dropna()
 
         df.index = pd.to_datetime(df.index)
         df = df.sort_index()
@@ -126,6 +128,7 @@ else:
     st.subheader("🇺🇸 S&P 500")
     with st.spinner("Descargando datos..."):
         df = yf.download('^GSPC', auto_adjust=True, progress=False)['Close']
+        df.rename(columns={"^GSPC":"Close"}, inplace = True)
         df = df.loc[df.index.year > 1980].copy()
         df["Year"] = df.index.year
         df["Month"] = df.index.month
