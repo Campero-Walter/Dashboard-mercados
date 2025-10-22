@@ -58,6 +58,7 @@ if seccion == "MERVAL (USD CCL)":
         
         df_ccl = pd.concat([ypfd, ypf], axis=1)
         df_ccl.columns = ["YPFD.BA", "YPF"]
+        df_ccl.dropna(inplace=True)
         ccl = (df_ccl['YPFD.BA'] / df_ccl['YPF']).dropna()
         
         df = df.reindex(ccl.index, method='ffill')
@@ -169,6 +170,7 @@ st.markdown("---")
 st.caption("By Walter Campero")
 st.caption("Portfolio Manager | Quant Analyst")
 st.caption("Fuente: Yahoo Finance")
+
 
 
 
