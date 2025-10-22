@@ -51,9 +51,8 @@ if seccion == "MERVAL (USD CCL)":
         ticker = "^MERV"
         df = yf.download(ticker, auto_adjust=False, progress=False)['Close']
         df.rename(columns={"^MERV": "Close"}, inplace=True)
-
-        ypfd = yf.download('YPFD.BA', auto_adjust=True)['Close']
-        ypf = yf.download('YPF', auto_adjust=True)['Close']
+        ypfd = yf.download('YPFD.BA', auto_adjust=False)['Close']
+        ypf = yf.download('YPF', auto_adjust=False)['Close']
         
         df_ccl = pd.concat([ypfd, ypf], axis=1)
         df_ccl.columns = ["YPFD.BA", "YPF"]
@@ -171,6 +170,7 @@ st.markdown("---")
 st.caption("By Walter Campero")
 st.caption("Portfolio Manager | Quant Analyst")
 st.caption("Fuente: Yahoo Finance")
+
 
 
 
