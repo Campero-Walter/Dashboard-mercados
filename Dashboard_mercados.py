@@ -58,7 +58,7 @@ if seccion == "MERVAL (USD CCL)":
         df_ccl.columns = ["YPFD.BA", "YPF"]
         ccl = (df_ccl['YPFD.BA'] / df_ccl['YPF']).dropna()
         
-        df = df.to_frame(name="Close")
+        df = df.to_frame(name='Close')
         df = df.reindex(ccl.index, method='ffill')  # rellena fechas faltantes
         df["USD_CCL"] = ccl
         df["Close_USD"] = df["Close"] / df["USD_CCL"]
@@ -170,6 +170,7 @@ st.markdown("---")
 st.caption("By Walter Campero")
 st.caption("Portfolio Manager | Quant Analyst")
 st.caption("Fuente: Yahoo Finance")
+
 
 
 
