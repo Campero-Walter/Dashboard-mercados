@@ -1,0 +1,6 @@
+streamlit==1.39.0
+yfinance==0.2.50
+matplotlib
+seaborn
+pandas
+numpy
